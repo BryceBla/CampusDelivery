@@ -33,7 +33,7 @@ export class HomePage {
 
     setTimeout(() => {
       modal.present();
-    },3000);
+    });
   }
 
   // make array with range is n
