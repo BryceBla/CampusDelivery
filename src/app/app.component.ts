@@ -45,7 +45,7 @@ export class MyApp {
       count: 0,
       component: JobHistoryPage
     },
-    {
+  /*  {
       title: 'Setting',
       icon: 'settings',
       count: 0,
@@ -56,7 +56,7 @@ export class MyApp {
       icon: 'ios-help-circle-outline',
       count: 0,
       component: SupportPage
-    },
+    },*/
     {
       title: 'Logout',
       icon: 'md-exit',
@@ -82,5 +82,3 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 }
-
-

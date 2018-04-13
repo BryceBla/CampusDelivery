@@ -16,34 +16,38 @@
           <ion-icon name="paper-plane" color="dark" ></ion-icon>
         </div>
         <h2 ion-text color="dark" >
-          Campus Deliery!!
+          Campus Delivery!!
         </h2>
         <p ion-text color="dark" > Deliver anything on Campus </p>
       </div>
 
       <!-- Login form -->
 
-      <ion-list class="list-form" padding>
+      <form (submit)="sign()">
+        <ion-list padding inset scroll="false">
 
-        <ion-item>
-          <ion-input type="text" placeholder="Your name"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label stacked>Username</ion-label>
+            <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-input type="text" placeholder="Email"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-input type="password" placeholder="Password"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" name="confirm"></ion-input>
+          </ion-item>
 
-      </ion-list>
+          <div padding>
+            <button ion-button color="accent" block [disabled]="email.length == '0' || username.length == '0' || password.length == '0'">Register</button>
+          </div>
 
-      <div padding>
-        <button  ion-button color="secondary"  block (click)="signup()">
-          Create account
-        </button>
-      </div>
+        </ion-list>
+      </form>
+
 
     </div>
 

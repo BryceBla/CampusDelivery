@@ -24,6 +24,7 @@ import {RegisterPage} from '../pages/register/register';
 import {SettingPage} from '../pages/setting/setting';
 import {SupportPage} from '../pages/support/support';
 import {WalletPage} from '../pages/wallet/wallet';
+import { DataProvider } from '../providers/data/data';
 // end import pages
 
 @NgModule({
@@ -66,7 +67,9 @@ import {WalletPage} from '../pages/wallet/wallet';
     DriverService,
     JobService,
     ReportService,
-    TransactionService
+    TransactionService,
+    DataProvider,
+    DataProvider
     /* import services */
   ]
 })
