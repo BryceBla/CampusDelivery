@@ -20,6 +20,8 @@ export class RegisterPage {
    email: string = '';
 
   constructor(public nav: NavController) {
+    Parse.initialize("JtT43pNpUfyZkEYtTIovw3nwtXR26Z2EwhyNbF6U", "1TTtwpkT5sMvz0dOzF9HBtWyOrN0f4EKA3ALOK03");
+    Parse.serverURL = "https://parseapi.back4app.com/";
 
   }
 
@@ -27,7 +29,7 @@ export class RegisterPage {
     var user = new Parse.User();
 
       user.set("email", this.email);
-      user.set("name", this.username);
+      user.set("username", this.username);
       user.set("password", this.password);
 
       var self = this;
@@ -38,7 +40,7 @@ export class RegisterPage {
           this.nav.setRoot(HomePage);
       },
         error: function(user, error){
-          console.log("fail");
+          console.log("fail" + error.code + " " + error.message);
       }
    })
   }

@@ -18,11 +18,11 @@ export class DataProvider {
     console.log('Hello DataProvider Provider');
     console.log('Initiated Parse');
 
-   const Menu = Parse.Object.extend('Menu');
-   let query = new Parse.Query(Menu);
+   const User = Parse.Object.extend('User');
+   let query = new Parse.Query(User);
    query.limit(1000);
-   query.find().then((menus) => {
-     console.log(menus.length)
+   query.find().then((users) => {
+     console.log(users.length)
    }, (error) => {
    });
   }
