@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {HomePage} from "../home/home";
 import {Parse} from "parse";
@@ -19,7 +19,7 @@ export class RegisterPage {
    username: string = '';
    email: string = '';
 
-  constructor(public nav: NavController) {
+  constructor(public nav: NavController, public alertCtrl: AlertController) {
     Parse.initialize("JtT43pNpUfyZkEYtTIovw3nwtXR26Z2EwhyNbF6U", "1TTtwpkT5sMvz0dOzF9HBtWyOrN0f4EKA3ALOK03");
     Parse.serverURL = "https://parseapi.back4app.com/";
 
@@ -32,17 +32,32 @@ export class RegisterPage {
       user.set("username", this.username);
       user.set("password", this.password);
 
-      var self = this;
 
       user.signUp(null, {
         succes: function(user) {
           console.log("succes");
-          this.nav.setRoot(HomePage);
       },
         error: function(user, error){
-          console.log("fail" + error.code + " " + error.message);
+          let alert = this.alertCtrl.create({
+            title: 'Error, ' + error.code ,
+            subTitle: ' '  + error.message,
+            buttons: ['Dismiss']
+          });
+          alert.present();
+          console.log("failBoat" + error.code + " " + error.message);
       }
-   })
+      });
+
+      let alert = this.alertCtrl.create({
+        title: 'Welcome to Campus Delivery ',
+        subTitle: ' Go login to enjoy the app',
+        buttons: ['Ight']
+      });
+      alert.present();
+
+
+
+
   }
 
   login() {

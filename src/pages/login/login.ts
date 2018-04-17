@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {RegisterPage} from '../register/register';
-import {HomePage} from '../home/home'
+import {HomePage} from '../home/home';
+import {Parse} from 'parse';
 
 /*
   Generated class for the LoginPage page.
@@ -14,6 +15,8 @@ import {HomePage} from '../home/home'
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  password: string = '';
+   username: string = '';
 
   constructor(public nav: NavController) {
 
@@ -24,6 +27,16 @@ export class LoginPage {
   }
 
   login() {
-    this.nav.setRoot(HomePage);
-  }
+    var self=this;
+
+    Parse.User.logIn(this.username, this.password, {
+      success: function(user) {
+        console.log("logged in "+user.get("username"));
+        self.nav.setRoot(HomePage);
+},
+error: function(user, error) {
+    console.log("did not work");
+}
+});
+}
 }
