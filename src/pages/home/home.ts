@@ -1,8 +1,12 @@
 import {Component} from '@angular/core';
-import {NavController, ModalController, AlertController} from 'ionic-angular';
+import {Http, HttpModule} from '@angular/http';
+import {App,NavController, ModalController, AlertController} from 'ionic-angular';
 import {DriverService} from '../../services/driver-service';
 import {ModalJobPage} from '../modal-job/modal-job';
-import {PickUpPage} from "../pick-up/pick-up";
+import {PickUpPage} from '../pick-up/pick-up';
+import {DataProvider} from '../../providers/data/data';
+import {Parse} from 'parse';
+//import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   selector: 'page-home',
@@ -11,10 +15,13 @@ import {PickUpPage} from "../pick-up/pick-up";
 export class HomePage {
   // driver info
   public driver:any;
+  newOrder={ Location: null, Image: null, Description: null,
+   Destination: null, Name: null, PhoneNumber:null};
+  orderItems=[];
 
-  constructor(public nav: NavController, public driverService: DriverService, public modalCtrl: ModalController,
+  constructor(public DataProvider: DataProvider,public driverService: DriverService, public nav: NavController, public modalCtrl: ModalController,
               public alertCtrl: AlertController) {
-
+              this.listOrders();
     // get driver info from service
     this.driver = driverService.getCurrentDriver();
 
@@ -32,10 +39,35 @@ export class HomePage {
     });
 
     setTimeout(() => {
-      modal.present();
+      //modal.present();
     });
   }
-
+  public listOrders(): Promise<any> {
+  let offset = this.orderItems.length;
+  let limit = 10;
+  return this.DataProvider.getOrders(offset, limit).then((result) => {
+    for (let i = 0; i < result.length; i++) {
+      let object = result[i];
+      this.orderItems.push(object);
+    }
+  }, (error) => {
+    console.log(error);
+  });
+}
+public postOrder() {
+  this.DataProvider.addOrder(this.newOrder).then((orderItem) => {
+    this.orderItems.push(orderItem);
+    this.newOrder.Location = null;
+    this.newOrder.Image = null;
+    this.newOrder.Description = null;
+    this.newOrder.Destination = null;
+    this.newOrder.Name = null;
+    this.newOrder.PhoneNumber = null;
+  }, (error) => {
+    console.log(error);
+    alert('Error adding item.');
+  });
+}
   // make array with range is n
   range(n) {
     return new Array(n);

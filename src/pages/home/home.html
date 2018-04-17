@@ -1,40 +1,58 @@
 <ion-header>
-
-  <ion-navbar color="primary" >
-    <button  ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-navbar color="primary">
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content class=" primary-bg">
-  <div padding text-center>
-    <h3 ion-text color="light" >{{ driver.name }}</h3>
-    <h4 ion-text color="gray" >{{ driver.plate }}</h4>
+<ion-content>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <span ion-text color="gray" >Referral Code</span>
-          <h4 ion-text color="light" >{{ driver.ref_code }}</h4>
-        </ion-col>
-        <ion-col>
-          <span ion-text color="gray" >Rating</span>
-          <h4>
-            <ion-icon name="md-star" color="yellow"  *ngFor="let start of range(driver.rating)"></ion-icon>
-            <ion-icon name="md-star" color="dark"  *ngFor="let start of range(5- driver.rating)"></ion-icon>
-          </h4>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-list>
 
-    <button  ion-button block padding color="gray" >
-      {{ driver.balance }} USD
-    </button>
+    <ion-item-divider color="primary-light">
+      Add Order
+    </ion-item-divider>
+    <ion-item>
+      <ion-input type="text" placeholder="Location" [(ngModel)]="newOrder.Location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Image" [(ngModel)]="newOrder.Image"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Description" [(ngModel)]="newOrder.Description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Destination" [(ngModel)]="newOrder.Destination"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Name" [(ngModel)]="newOrder.Name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="Phone Number" [(ngModel)]="newOrder.PhoneNumber"></ion-input>
+    </ion-item>
+    <ion-item no-lines>
+      <button ion-button icon-left color="accent" (click)="postOrder()"><ion-icon name="checkmark-circle"></ion-icon>Submit</button>
+    </ion-item>
 
-    <div>
-      <span ion-text color="light" >pending({{ driver.balance_pending }})</span>
-    </div>
-  </div>
-</ion-content>
+    <ion-item-divider color="primary-light">
+      Orders
+    </ion-item-divider>
+    <ion-item *ngFor="let orderItem of orderItems">
+      <h2>{{ orderItem.get('Location') }}</h2>
+      <img src = {{orderItem.get('Image')}}/>
+      <p>{{ orderItem.get('Description') }}</p>
+      <p>{{ orderItem.get('Destination') }}</p>
+      <p>{{ orderItem.get('Name') }}</p>
+      <p>{{ orderItem.get('PhoneNumber') }}</p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(listOrders())">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>

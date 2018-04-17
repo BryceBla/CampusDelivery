@@ -4,6 +4,8 @@ import {MyApp} from './app.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {Http, HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http'
 
 // import services
 import {DriverService} from '../services/driver-service';
@@ -44,7 +46,9 @@ import { DataProvider } from '../providers/data/data';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +72,6 @@ import { DataProvider } from '../providers/data/data';
     JobService,
     ReportService,
     TransactionService,
-    DataProvider,
     DataProvider
     /* import services */
   ]

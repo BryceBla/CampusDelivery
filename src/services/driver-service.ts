@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Http, HttpModule} from '@angular/http';
 import {DRIVER} from './mock-driver';
 
 @Injectable()
