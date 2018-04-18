@@ -58,9 +58,9 @@ export class HomePage {
     console.log(Name);
     let orderDesc = this.modalCtrl.create(ModalJobPage, {Image: Image, Destination:Destination,
     Description: Description,Location: location, Name: Name, PhoneNumber: PhoneNumber});
-    orderDesc.onDidDismiss(() => {
-      if(item){
-
+    orderDesc.onDidDismiss(confirm => {
+      if(confirm){
+        this.DataProvider.addToUser(item);
       }});
     orderDesc.present();
   }

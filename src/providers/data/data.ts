@@ -46,6 +46,7 @@ export class DataProvider {
   const OrderItem = Parse.Object.extend('OrderItems');
 
   let order = new OrderItem();
+  order.set('userID', Parse.User.current());
   order.set('Location', newOrder.Location);
   order.set('Image', newOrder.Image);
   order.set('Description', newOrder.Description);
@@ -79,18 +80,29 @@ error: function(user, error) {
 });
 }*/
 public addToUser(newDelivery){
-
-  let currentUser = Parse.User.current();
+  var userList=[];
+  userList[0]=Parse.User.current();
+  userList[1]=newDelivery.get('userID');
+  var groupACL = new Parse.ACL();
+  for (var i=0; i< userList.length; i++){
+    groupACL.setReadAccess(userList[i],true);
+  }
+  groupACL.setWriteAccess(userList[1], true);
+  newDelivery.setACL(groupACL);
+  newDelivery.save();
+  /*let currentUser = Parse.User.current();
+  let Deliveries = currentUser.extend("Deliveries");
+  let deliveries = new Deliveries();
 if (currentUser) {
-    currentUser.set("Deliveries", newDelivery);
-    currentUser.save(null,{
-      success: function(currentUser){
-
+    deliveries.save(null,{
+      success: function(deliveries){
+        currentUser.set("Deliveries", newDelivery);
+        currentUser.save();
       }
-    })
+    });
 } else {
     // show the signup or login page
-}
+}*/
 
 
 
