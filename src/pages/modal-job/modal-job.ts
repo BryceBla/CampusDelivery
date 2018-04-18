@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ViewController} from 'ionic-angular';
 import {JobService} from '../../services/job-service';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the ModalJobPage page.
@@ -16,15 +17,27 @@ export class ModalJobPage {
   // job info
   public job: any;
 
+  public Image;
+  public Destination;
+  public Description;
+  public location;
+  public Name;
+  public PhoneNumber;
   // remaining time for countdown
   public remainingTime = 20;
 
-  constructor(public viewCtrl: ViewController, public jobService: JobService) {
+  constructor(public viewCtrl: ViewController,public navParams: NavParams, public jobService: JobService) {
     // get job info from service
-    this.job = jobService.getItem(1);
+
+    this.Image=navParams.get('Image');
+    this.Destination=navParams.get('Destination');
+    this.Description=navParams.get('Description');
+    this.location=navParams.get('Location');
+    this.Name=navParams.get('Name');
+    this.PhoneNumber=navParams.get('PhoneNumber');
 
     // start count down
-    this.countDown();
+
   }
 
   // close modal
@@ -33,7 +46,7 @@ export class ModalJobPage {
   }
 
   // count down
-  countDown() {
+/*countDown() {
     let interval = setInterval(() => {
       this.remainingTime--;
 
@@ -44,7 +57,7 @@ export class ModalJobPage {
         this.viewCtrl.dismiss();
       }
     }, 1000);
-  }
+  }*/
 
   // accept job
   accept() {

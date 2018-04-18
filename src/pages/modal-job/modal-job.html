@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="light" >
-    <ion-title>New job</ion-title>
+    <ion-title>Delivery Description</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,21 +19,36 @@
     <ion-row>
       <ion-col col-2 text-center>
         <ion-icon name="pin" class="icon-job"></ion-icon>
-        <div class="distance">{{ job.from.distance }}km</div>
+        <div class="distance">{{this.Location}}</div>
       </ion-col>
       <ion-col col-10>
-        <h4>{{ job.from.title }}</h4>
-        <span>{{ job.from.address }}</span>
+        <h4>Location: {{this.location}}</h4>
+        <span></span>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-2 text-center>
         <ion-icon name="ios-flag-outline" class="icon-job"></ion-icon>
-        <div class="distance">{{ job.from.distance }}km</div>
+        <div class="distance">{{this.Location}}</div>
       </ion-col>
       <ion-col col-10>
-        <h4>{{ job.to.title }}</h4>
-        <span>{{ job.to.address }}</span>
+        <h4>Destination: {{this.Destination}}</h4>
+        <span></span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2>Name: {{this.Name}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2>Number: {{this.PhoneNumber}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p class="description">{{this.Description}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -42,13 +57,13 @@
   <ion-grid class="bottom-buttons">
     <ion-row>
       <ion-col col-5>
-        <button  ion-button block color="danger"  (click)="close()">SKIP</button>
+        <button  ion-button block color="danger"  (click)="close()">Cancel</button>
       </ion-col>
       <ion-col col-2 text-center class="remaining">
-        <span>{{ remainingTime }}</span>
+        
       </ion-col>
       <ion-col col-5>
-        <button  ion-button block color="secondary"  (click)="accept()">SELECT</button>
+        <button  ion-button block color="green"  (click)="accept()">Accept Job</button>
       </ion-col>
     </ion-row>
   </ion-grid>

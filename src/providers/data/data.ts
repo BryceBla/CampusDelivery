@@ -64,4 +64,49 @@ export class DataProvider {
     }
   });
 }
+/*public logIn(username,password) {
+  var self=this;
+
+  this.user=Parse.User.logIn(username, password, {
+    success: function(user) {
+
+      console.log("logged in "+user.get("username"));
+      this.nav.setRoot(HomePage);
+},
+error: function(user, error) {
+  console.log("did not work");
+}
+});
+}*/
+public addToUser(newDelivery){
+
+  let currentUser = Parse.User.current();
+if (currentUser) {
+    currentUser.set("Deliveries", newDelivery);
+    currentUser.save(null,{
+      success: function(currentUser){
+
+      }
+    })
+} else {
+    // show the signup or login page
+}
+
+
+
+
+
+
+}
+/*public currentUser(): User {
+  let u = Parse.User.current();
+  if (u) {
+    var user = new User();
+    user.id = u.id;
+    user.name = u.get('username');
+    user.email = u.get('email');
+    return user;
+  }
+  return null
+}*/
 }

@@ -22,6 +22,7 @@ export class HomePage {
   constructor(public DataProvider: DataProvider,public driverService: DriverService, public nav: NavController, public modalCtrl: ModalController,
               public alertCtrl: AlertController) {
               this.listOrders();
+
     // get driver info from service
     this.driver = driverService.getCurrentDriver();
 
@@ -41,6 +42,27 @@ export class HomePage {
     setTimeout(() => {
       //modal.present();
     });
+  }
+  public addDelivery(order)
+  {
+    this.DataProvider.addToUser(order);
+  }
+  orderDescription(item){
+    console.log("test");
+    const Name=item.get('Name');
+    const Image=item.get('Image');
+    const Destination=item.get('Destination');
+    const location=item.get('Location');
+    const Description=item.get('Description');
+    const PhoneNumber=item.get('PhoneNumber');
+    console.log(Name);
+    let orderDesc = this.modalCtrl.create(ModalJobPage, {Image: Image, Destination:Destination,
+    Description: Description,Location: location, Name: Name, PhoneNumber: PhoneNumber});
+    orderDesc.onDidDismiss(() => {
+      if(item){
+
+      }});
+    orderDesc.present();
   }
   public listOrders(): Promise<any> {
   let offset = this.orderItems.length;

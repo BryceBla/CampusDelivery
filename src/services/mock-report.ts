@@ -1,5 +1,5 @@
 export let REPORT = {
-  today: 5,
+  today: 3,
   this_week: 15,
   this_month: 15,
   last_month: 10,

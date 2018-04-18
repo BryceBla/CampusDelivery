@@ -1,12 +1,17 @@
+
+  <ion-navbar color="primary" >
+ <button  ion-button menuToggle>
+   <ion-icon name="menu"></ion-icon>
+ </button>
+ <ion-title>Home</ion-title>
+</ion-navbar>
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+ <ion-navbar color="primary" >
+ <button  ion-button menuToggle>
+   <ion-icon name="menu"></ion-icon>
+ </button>
+ <ion-title>Home</ion-title>
+</ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -18,9 +23,6 @@
     </ion-item-divider>
     <ion-item>
       <ion-input type="text" placeholder="Location" [(ngModel)]="newOrder.Location"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder="Image" [(ngModel)]="newOrder.Image"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Description" [(ngModel)]="newOrder.Description"></ion-input>
@@ -41,9 +43,9 @@
     <ion-item-divider color="primary-light">
       Orders
     </ion-item-divider>
-    <ion-item *ngFor="let orderItem of orderItems">
+
+    <ion-item *ngFor="let orderItem of orderItems" (click)=orderDescription(orderItem) >
       <h2>{{ orderItem.get('Location') }}</h2>
-      <img src = {{orderItem.get('Image')}}/>
       <p>{{ orderItem.get('Description') }}</p>
       <p>{{ orderItem.get('Destination') }}</p>
       <p>{{ orderItem.get('Name') }}</p>
